@@ -1,6 +1,3 @@
-fastapi==0.115.5
-uvicorn==0.32.0
-
-numpy==1.26.4
-livef1==0.1.55
+Flask==3.0.3
+gunicorn==22.0.0
 requests==2.32.3
