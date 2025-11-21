@@ -1,16 +1,21 @@
-from fastapi import FastAPI
-from livef1 import get_season
+from flask import Flask, jsonify
+import requests
 
-app = FastAPI()
+app = Flask(__name__)
 
-@app.get("/")
-def root():
-    return {"status": "ok", "message": "Render LiveF1 test server running"}
+@app.route("/")
+def index():
+    return jsonify({"status": "ok", "message": "Render Flask server running"})
 
-@app.get("/season/{year}")
-def season_data(year: int):
+@app.route("/season/<int:year>")
+def season_data(year):
     try:
-        season = get_season(year)
-        return {"success": True, "data": season}
+        # Simple test request
+        url = f"https://api.openf1.org/v1/sessions?year={year}"
+        r = requests.get(url)
+        return jsonify({"success": True, "data": r.json()})
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        return jsonify({"success": False, "error": str(e)})
+
+if __name__ == "__main__":
+    app.run()
