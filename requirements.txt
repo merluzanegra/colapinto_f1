@@ -1,4 +1,6 @@
 fastapi==0.115.5
 uvicorn==0.32.0
-livef1==1.0.953
+
 numpy==1.26.4
+livef1==0.1.55
+requests==2.32.3
